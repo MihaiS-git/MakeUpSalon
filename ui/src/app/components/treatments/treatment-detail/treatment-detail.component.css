@@ -1,0 +1,22 @@
+.card-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffc107; /* Ensure the background color is visible */
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card-img-top {
+  object-fit: cover;
+}
