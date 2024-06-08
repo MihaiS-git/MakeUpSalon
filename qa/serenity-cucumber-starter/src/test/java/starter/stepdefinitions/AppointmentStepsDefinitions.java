@@ -12,8 +12,8 @@ public class AppointmentStepsDefinitions {
     AppointmentSteps appointmentSteps;
     ChangePasswordSteps changePasswordSteps;
 
-    @When("I choose professional Kardigan Kim treatments")
-    public void i_choose_professional_kardigan_kim_treatments() {
+    @When("I choose professional Kim Kardigan treatments")
+    public void i_choose_professional_kim_kardigan_treatments() {
         appointmentSteps.chooseProfessional();
     }
 
@@ -22,9 +22,9 @@ public class AppointmentStepsDefinitions {
         appointmentSteps.selectTreatment();
     }
 
-    @When("I select the date and time for my appointment")
-    public void i_select_the_date_and_time_for_my_appointment() {
-        appointmentSteps.selectDateTime();
+    @When("I select the date and time {string} for my appointment")
+    public void iSelectTheDateAndTimeForMyAppointment(String dateTime) {
+        appointmentSteps.selectDateTime(dateTime);
     }
 
     @When("I click on the Book button")

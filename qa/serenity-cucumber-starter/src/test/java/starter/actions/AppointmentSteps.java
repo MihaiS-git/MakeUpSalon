@@ -27,18 +27,12 @@ public class AppointmentSteps extends UIInteractionSteps {
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", treatmentButton);
         treatmentButton.click();
     }
-    public void selectDateTime() {
-        // Set the desired date and time
-        LocalDateTime dateTime = LocalDateTime.of(2024, 8, 2, 13, 0, 0);
-
-        // Format the date and time as required (yyyy-MM-dd HH:mm:ss)
+    public void selectDateTime(String dateTimeStr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(dateTimeStr, formatter);
         String formattedDateTime = dateTime.format(formatter);
-
         find(AppointmentPage.DATE_TIME_PICKER).click();
-
         find(AppointmentPage.DATE_TIME_PICKER).clear();
-
         find(AppointmentPage.DATE_TIME_PICKER).sendKeys(formattedDateTime);
     }
 

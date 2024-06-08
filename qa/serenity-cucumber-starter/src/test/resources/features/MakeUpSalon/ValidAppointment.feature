@@ -11,9 +11,9 @@ Feature: Book an appointment successfully at a makeup salon
   @validAppointment
     Scenario: Successfully add an appointment
 
-      When I choose professional Kardigan Kim treatments
+      When I choose professional Kim Kardigan treatments
       And I select the treatment Prom Or Special Event Makeup
-      And I select the date and time for my appointment
+    And I select the date and time "2024-11-10 13:00:00" for my appointment
       And I click on the Book button
       Then I should see the "Appointment created successfully." message
       And I click on the Account icon

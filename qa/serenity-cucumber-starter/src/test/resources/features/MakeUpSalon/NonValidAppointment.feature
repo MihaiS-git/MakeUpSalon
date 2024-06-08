@@ -11,8 +11,8 @@ Feature: Book an appointment successfully at a makeup salon
 
   @invalidDateTime
   Scenario: Attempt to add an appointment with the same date and time
-    When I choose professional Kardigan Kim treatments
+    When I choose professional Kim Kardigan treatments
     And I select the treatment Prom Or Special Event Makeup
-    And I select the date and time for my appointment
+    And I select the date and time "2024-11-11 12:00:00" for my appointment
     And I click on the Book button
     Then I should see the "Not able to create an appointment with the selected data." message
