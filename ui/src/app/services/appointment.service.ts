@@ -80,7 +80,7 @@ export class AppointmentService {
       .subscribe(
         response => {
           console.log('Update appointment response:', response);
-          alert("Appointment updated successfuly!")
+          alert("Appointment updated successfully!")
         },
         error => {
           console.error('Error updating appointment:', error);

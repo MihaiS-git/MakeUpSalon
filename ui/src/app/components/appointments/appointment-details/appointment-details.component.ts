@@ -15,29 +15,32 @@ import { DatePipe } from '@angular/common';
   selector: 'app-appointment-details',
   templateUrl: './appointment-details.component.html',
   styleUrls: ['./appointment-details.component.css'],
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
 export class AppointmentDetailsComponent implements OnInit, OnDestroy {
   appointmentItems: AppointmentItem[] = [];
   appointmentItem: AppointmentItem;
   totalPrice: number = 0.0;
-  startDate: Date;
+  /* startDate: Date; */
+  startDate: '';
   personId: number;
   employeeId: number;
   user: User;
   isLoggedIn = false;
   private authSubscription: Subscription;
 
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private accountService: AccountService,
     private appointmentService: AppointmentService,
     private treatmentService: TreatmentService,
     private router: Router,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit(): void {
     this.listAppointmentDetails();
-    this.authSubscription = this.authService.user.subscribe(user => {
+    this.authSubscription = this.authService.user.subscribe((user) => {
       this.isLoggedIn = !!user;
       if (user) {
         this.user = user;
@@ -55,26 +58,29 @@ export class AppointmentDetailsComponent implements OnInit, OnDestroy {
   }
 
   loadPersonDetails(personId: number) {
-    this.accountService.getPersonById(personId).pipe(
-      catchError((err) => {
-        console.error('Error fetching person details:', err);
-        return of(null);
-      }),
-      tap(resData => {
-        if (resData) {
-          this.personId = resData.personId;
-        } else {
-          console.error('Person details not found.');
-        }
-      })
-    ).subscribe();
+    this.accountService
+      .getPersonById(personId)
+      .pipe(
+        catchError((err) => {
+          console.error('Error fetching person details:', err);
+          return of(null);
+        }),
+        tap((resData) => {
+          if (resData) {
+            this.personId = resData.personId;
+          } else {
+            console.error('Person details not found.');
+          }
+        })
+      )
+      .subscribe();
   }
 
   listAppointmentDetails() {
     this.appointmentItems = this.appointmentService.appointmentItems;
     this.appointmentItem = this.appointmentItems[0];
     this.appointmentService.totalPrice.subscribe(
-      data => this.totalPrice = data
+      (data) => (this.totalPrice = data)
     );
     this.appointmentService.computeTotals();
   }
@@ -84,35 +90,41 @@ export class AppointmentDetailsComponent implements OnInit, OnDestroy {
   }
 
   book() {
-    this.treatmentService.getEmployeesByTreatmentId(this.appointmentItem.id)
+    this.treatmentService
+      .getEmployeesByTreatmentId(this.appointmentItem.id)
       .subscribe(
-        res => {
+        (res) => {
           this.employeeId = res[0].personId;
 
           const appointmentRequestDto: AppointmentRequestDto = {
             customerId: this.user.personId,
-            startDateTime: this.datePipe.transform(new Date(this.startDate), 'yyyy-MM-dd HH:mm:ss'),
+            /* startDateTime: this.datePipe.transform(new date(this.startDate), 'yyyy-MM-dd HH:mm:ss'), */
+            startDateTime: this.startDate,
             approvalStatus: Status.PENDING,
             employeeId: this.employeeId,
-            treatmentId: this.appointmentItem.id
+            treatmentId: this.appointmentItem.id,
           };
 
-          this.appointmentService.addAppointment(appointmentRequestDto).subscribe({
-            next: (res) => {
-              if (res) {
-                console.log('Appointment created successfuly');
-                alert('Appointment created successfuly.');
-              }
-            },
-            error: (err) => {
-              console.log('Failed to create Appointment', err);
-              alert('Not able to create an appointment with the selected data.');
-            }
-          });
+          this.appointmentService
+            .addAppointment(appointmentRequestDto)
+            .subscribe({
+              next: (res) => {
+                if (res) {
+                  console.log('Appointment created successfully');
+                  alert('Appointment created successfully.');
+                }
+              },
+              error: (err) => {
+                console.log('Failed to create Appointment', err);
+                alert(
+                  'Not able to create an appointment with the selected data.'
+                );
+              },
+            });
           this.clearTable();
           this.router.navigate(['']);
         },
-        error => {
+        (error) => {
           console.error('Error creating new appointment:', error);
           alert('Error creating new appointment.');
         }
