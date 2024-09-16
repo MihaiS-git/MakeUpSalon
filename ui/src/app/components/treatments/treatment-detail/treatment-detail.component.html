@@ -1,0 +1,10 @@
+<div class="card mx-md-2 my-2 bg-warning-subtle" style="width: 16rem; height: 38rem">
+  <img [src]="treatment.pictureUrl" alt="picture" class="card-img-top image-fluid">
+  <div class="card-body d-flex flex-column text-center">
+    <h5 class="card-title">{{treatment.name}}</h5>
+    <p class="card-text">Description: {{treatment.description}}</p>
+    <p class="card-text"><small class="text-muted">Estimated Duration: {{treatment.estimatedDuration}}</small></p>
+    <p class="card-text"><small class="text-muted">Price: {{treatment.price| currency}}</small></p>
+    <button class="btn btn-outline-dark mt-auto" (click)="select()">Select</button>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.fixed-width-span {
+  width: 120px; /* Default width for small screens */
+}
+
+@media (min-width: 576px) {
+  .fixed-width-span {
+    width: 140px; /* Width for small to medium screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .fixed-width-span {
+    width: 160px; /* Width for medium screens */
+  }
+}
+
+@media (min-width: 992px) {
+  .fixed-width-span {
+    width: 180px; /* Width for large screens */
+  }
+}
+
+@media (min-width: 1200px) {
+  .fixed-width-span {
+    width: 200px; /* Width for extra large screens */
+  }
+}

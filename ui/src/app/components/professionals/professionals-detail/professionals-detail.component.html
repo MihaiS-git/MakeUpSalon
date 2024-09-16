@@ -1,0 +1,9 @@
+<div class="card mx-md-2 my-2 bg-warning-subtle" style="width: 15rem; height: 28rem" *ngIf="employee">
+  <img [src]="employee.pictureUrl" alt="picture" class="card-img-top image-fluid">
+  <div class="card-body d-flex flex-column text-center">
+    <h4 class="card-title">{{employee.firstName}} {{employee.lastName}}</h4>
+    <p class="card-text">ID: {{employee.personId}}</p>
+    <p class="card-text">Mobile: {{employee.phoneNumber}}</p>
+    <button class="btn btn-outline-dark mt-auto" (click)="showEmployeeTreatmentsList()">Treatments</button>
+  </div>
+</div>

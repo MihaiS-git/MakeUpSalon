@@ -1,0 +1,12 @@
+<div class="card d-flex flex-wrap mx-md-2 my-1 bg-warning" style="width: 16rem; height: 38rem" [routerLink]="[index]"
+  routerLinkActive="active">
+  <div class="card-body text-center">
+    <h5 class="card-title">Appointment ID: {{appointment.appointmentId}}</h5>
+    <p class="card-text">Date: {{appointment.startDateTime}}</p>
+    <p class="card-text">Approved: {{appointment.approvalStatus}}</p>
+    <p class="card-text">Professional: {{appointment.employee}}</p>
+    <p class="card-text">Treatments:</p>
+    <app-treatment-detail *ngFor="let treatmentEl of appointment.treatments; let i = index" [treatment]="treatmentEl"
+      [index]="i"></app-treatment-detail>
+  </div>
+</div>
